@@ -6,8 +6,8 @@
  * @format
  */
 
-import React, {useState} from 'react';
-import type {PropsWithChildren} from 'react';
+import React, { useState } from 'react';
+import type { PropsWithChildren } from 'react';
 import {
   Alert,
   Button,
@@ -24,9 +24,10 @@ import {
   View,
 } from 'react-native';
 
-import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
+import { Colors, Header } from 'react-native/Libraries/NewAppScreen';
 import CommonButton from '../commonComponent/CommonButton';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -37,7 +38,7 @@ type ButtonProps = PropsWithChildren<{
   onClick: () => string;
 }>;
 
-type ItemProps = {title: string};
+type ItemProps = { title: string };
 
 const DATA = [
   {
@@ -76,9 +77,32 @@ function LoginPage(): JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const buttonOnPress = (title) => {
-    console.log(title,"sdhgsdjhgfjhsdgfjhf")
+  const buttonOnPress = title => {
+    console.log(title, 'sdhgsdjhgfjhsdgfjhf');
     setUpdateVal(title);
+  };
+
+  const getData = async () => {
+    try {
+      AsyncStorage.getItem('my-key')
+        .then(token => {
+          console.log(token, 'data fetched successfully');
+          if (token !== null) {
+            // value previously stored
+          }
+        })
+        .catch(err => {
+          console.log(err, 'data fetch is failed');
+        });
+
+      // const data = await AsyncStorage.getItem('my-key');
+
+      // if (data !== null) {
+      //   // value previously stored
+      // }
+    } catch (e) {
+      // error reading value
+    }
   };
 
   return (
@@ -108,15 +132,17 @@ function LoginPage(): JSX.Element {
             title="welcome button"
             onClick={() =>
               navigation.navigate('Profile', {
-                buttonOnPress: (title) => {console.log(title,"sdfhjgdhjfgsdhjfgshjdfgjhsdfgjhsdgfj")},
-                statevalue: 'route from login',
+                buttonOnPress: title => {
+                  console.log(title, 'sdfhjgdhjfgsdhjfgshjdfgjhsdfgjhsdgfj');
+                },
+                statevalue: '7e866we634682763487263478234',
               })
             }
           />
 
           <Image
             style={styles.tinyLogo}
-            source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
+            source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }}
           />
           {/* <Section title="Debug" />
 

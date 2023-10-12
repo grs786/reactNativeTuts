@@ -31,8 +31,10 @@ import ProfileScreen from './src/screens/Profile';
 import BottomTabBar from './src/screens/BottomTabBar';
 import LoginPage from './src/screens/LoginPage';
 import 'react-native-gesture-handler';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/es/integration/react';
+import {store, persistor} from './src/store';
 const Stack = createNativeStackNavigator();
 
 // type SectionProps = PropsWithChildren<{
@@ -77,17 +79,24 @@ const Drawer = createDrawerNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="LoginPage">
-        <Drawer.Screen
-          name="LoginPage"
-          component={HomeScreen}
-          options={{title: 'Welcome'}}
-        />
-        <Drawer.Screen name="Profile" component={ProfileScreen} options={{title: 'navigate profile'}} />
-        <Drawer.Screen name="BottomTabBar" component={BottomTabBar} />
-      </Drawer.Navigator>
-      {/* <Stack.Navigator>
+    <SafeAreaView style={{flex: 1}}>
+      {/* <Provider store={store}> */}
+      {/* <PersistGate persistor={persistor}> */}
+      <NavigationContainer>
+        <Drawer.Navigator initialRouteName="LoginPage">
+          <Drawer.Screen
+            name="LoginPage"
+            component={HomeScreen}
+            options={{title: 'Welcome'}}
+          />
+          <Drawer.Screen
+            name="Profile"
+            component={ProfileScreen}
+            options={{title: 'navigate profile'}}
+          />
+          <Drawer.Screen name="BottomTabBar" component={BottomTabBar} />
+        </Drawer.Navigator>
+        {/* <Stack.Navigator>
         <Stack.Screen
           name="Home"
           component={LoginPage}
@@ -96,7 +105,10 @@ const App = () => {
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="BottomTabBar" component={BottomTabBar} />
       </Stack.Navigator> */}
-    </NavigationContainer>
+      </NavigationContainer>
+      {/* </PersistGate> */}
+      {/* </Provider> */}
+    </SafeAreaView>
   );
 };
 // function App(): JSX.Element {

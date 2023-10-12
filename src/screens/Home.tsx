@@ -26,6 +26,7 @@ import {
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 import CommonButton from '../commonComponent/CommonButton';
 import {useNavigation} from '@react-navigation/native';
+import * as homeAction from '../store/actions/home-action-types';
 
 type SectionProps = PropsWithChildren<{
   title: string;
