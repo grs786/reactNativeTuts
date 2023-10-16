@@ -59,9 +59,9 @@ class HttpClient {
   get = async (url: string, payload: IGet = {params: {}, query: {}}) => {
     const {params, query} = payload;
 
-    url = populateParams(url, params);
-    url = populateQuery(url, query);
-
+    // url = populateParams(url, params);
+    // url = populateQuery(url, query);
+    console.log(url, 'asdhjagsdjhagsdjgahjsdghajsgd');
     return axiosClient
       .get(url)
       .then(this.handleReponse)

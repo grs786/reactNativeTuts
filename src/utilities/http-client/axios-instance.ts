@@ -48,7 +48,7 @@ axiosInstance.interceptors.request.use(
   async request => {
     const token = await getToken();
     console.log('TOken236874', token);
-    if (token) {
+    if (!token) {
       request.headers = {
         ...request.headers,
         Authorization: `Bearer ${token}`,

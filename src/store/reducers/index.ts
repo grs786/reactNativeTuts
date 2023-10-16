@@ -5,11 +5,12 @@ import app from './app';
 import user from './user';
 import home from './home';
 
-import FilesystemStorage from 'redux-persist-filesystem-storage';
+// import FilesystemStorage from 'redux-persist-filesystem-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const config = {
   key: 'root',
-  storage: FilesystemStorage,
+  storage: AsyncStorage,
   blacklist: ['app', 'signUp'],
 };
 

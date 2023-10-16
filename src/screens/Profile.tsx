@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   Alert,
@@ -24,6 +24,8 @@ import {
 } from 'react-native';
 
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
+import {RootState} from '../store/reducers';
+import {useSelector} from 'react-redux';
 
 function OnClickButton({title, onClick}: ButtonProps) {
   return (
@@ -34,7 +36,7 @@ function OnClickButton({title, onClick}: ButtonProps) {
 }
 function Profile(props: any): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
-
+  const {userDetails} = useSelector((state: RootState) => state.user);
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
@@ -42,9 +44,12 @@ function Profile(props: any): JSX.Element {
   console.log(route.params, 'propspropspropspropspropspropsprops');
 
   const buttonClick = () => {
-    console.log("dfsgdhjfgsjdhf")
+    console.log('dfsgdhjfgsjdhf');
     route.params.buttonOnPress('reverse cyclic order');
   };
+  useEffect(() => {
+    console.log(userDetails, 'userDetailsuserDetailsuserDetails');
+  }, [userDetails]);
 
   return (
     <SafeAreaView style={backgroundStyle}>

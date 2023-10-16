@@ -26,7 +26,8 @@ import {
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 import CommonButton from '../commonComponent/CommonButton';
 import {useNavigation} from '@react-navigation/native';
-import * as homeAction from '../store/actions/home-action-types';
+import * as userActions from '../store/actions/user-actions-types';
+import {useDispatch} from 'react-redux';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -105,6 +106,7 @@ function HomeScreen(props: any): JSX.Element {
   const [updateVal, setUpdateVal] = useState('Native implementation');
   const [number, setNumber] = useState('');
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   console.log(props, 'propspropspropspropspropspropsprops');
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -112,6 +114,13 @@ function HomeScreen(props: any): JSX.Element {
 
   const buttonOnPress = () => {
     setUpdateVal('hello class');
+    const request = {
+      mobile: '9756787656',
+      country_code: '+91',
+      check_user: 'False',
+      navigatedFrom: 'login',
+    };
+    dispatch(userActions.loginViaNumber(request));
   };
 
   const onChangeNumber = (val: string) => {
@@ -152,7 +161,7 @@ function HomeScreen(props: any): JSX.Element {
             placeholder="Enter number value"
             keyboardType="email-address"
           />
-          {/* <OnClickButton title={'click button'} onClick={buttonOnPress} /> */}
+          <OnClickButton title={'click button'} onClick={buttonOnPress} />
 
           <CommonButton
             title="welcome button"
