@@ -1,3 +1,4 @@
+/* eslint-disable no-catch-shadow */
 import axios from 'axios';
 import {Platform} from 'react-native';
 
@@ -102,9 +103,7 @@ axiosInstance.interceptors.response.use(
         }
       }
     }
-
-    const error = getApiErrorMessage(err);
-
+    getApiErrorMessage(err);
     return Promise.reject(err);
   },
 );
